@@ -1,17 +1,23 @@
+import Country from "../models/country.js";
 
 export const checkCountry = async (req, res, next) => {
-    const {name} = req.body;
-    try {
-        const country = await CountryCluster.findOne({name});
-        
-        if(country){
-            return res.status(400).json({message: "Country already exists"});
-        }else {
+    const { alpha2Code, alpha3Code} = req.body;
+    const {code} = req.params;
+    if (req.method === 'GET' || req.method ==='DELETE' || req.method === 'PUT') {
+        const country = await Country.findOne ({ $or: [{ alpha2Code: code.toUpperCase()}, {alpha3Code: code.toUpperCase()}]});
+        if (country){
+            req.country = country;
             next();
+        } else {
+            return res.sendStatus(404);
         }
-        
-    } catch (error) {
-        res.status(500).json({message: error.message});
+    } else if ( req.method === 'POST') {
+        const existingCountry = await Country.findOne({$or: [{alpha2Code},{alpha3Code}]})
+        if (existingCountry) {
+            return res.status(409).json({message: 'Country already exists.'})
+        } else {
+            next();
+            
+        }
     }
 }
-

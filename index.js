@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/api',countriesRouter); // this is the middleware that will be used to route the request to the countriesRouter
+app.use('/api/countries',countriesRouter); // this is the middleware that will be used to route the request to the countriesRouter
 
 const startServer = async () => {
     await connectDatabase();

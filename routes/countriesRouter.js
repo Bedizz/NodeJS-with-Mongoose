@@ -6,11 +6,11 @@ import { checkCountry } from '../middlewares/countryMD.js';
 
 const countriesRouter = express.Router();
 
-countriesRouter.get('/countries', getCountries)
-countriesRouter.post('/countries',checkCountry, postCountry)
-countriesRouter.get('/countries/:code',getCountryByCode)
-countriesRouter.put('/countries/:code',putCountryByCode)
-countriesRouter.delete('/countries/:code',deleteCountryByCode)
+countriesRouter.get('/', getCountries)
+countriesRouter.post('/',checkCountry, postCountry)
+countriesRouter.get('/:code',getCountryByCode)
+countriesRouter.put('/:code',putCountryByCode)
+countriesRouter.delete('/:code',deleteCountryByCode)
 
 
 
