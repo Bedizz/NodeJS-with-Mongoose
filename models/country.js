@@ -9,12 +9,12 @@ const countrySchema = new mongoose.Schema({
         type: String,
         required: true,
         match: [/^[A-Z]{2}$/, 'Please fill a valid alpha2Code']
-            },
+    },
     alpha3Code: {
         type: String,
         required: true,
-        match: [/^[A-Z]{2}$/, 'Please fill a valid alpha2Code']
-                },
+        match: [/^[A-Z]{3}$/, 'Please fill a valid alpha3Code']
+    },
     visited: {
         type: Boolean,
         default: false
